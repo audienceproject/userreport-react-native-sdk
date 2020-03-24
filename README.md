@@ -1,53 +1,105 @@
-
-# react-native-userreport-sdk
-
-## Getting started
-
-`$ npm install react-native-userreport-sdk --save`
-
-### Mostly automatic installation
-
-`$ react-native link react-native-userreport-sdk`
-
-### Manual installation
+# Supported plarforms
+- iOS
+- Android
 
 
-#### iOS
+# Setup dependencies
 
-1. In XCode, in the project navigator, right click `Libraries` ➜ `Add Files to [your project's name]`
-2. Go to `node_modules` ➜ `react-native-userreport-sdk` and add `RNUserreportSdk.xcodeproj`
-3. In XCode, in the project navigator, select your project. Add `libRNUserreportSdk.a` to your project's `Build Phases` ➜ `Link Binary With Libraries`
-4. Run your project (`Cmd+R`)<
+```bash
+npm install --save @apr/react-native-userreport-sdk react-native-device-info
+```
 
 #### Android
-
-1. Open up `android/app/src/main/java/[...]/MainActivity.java`
-  - Add `import com.reactlibrary.RNUserreportSdkPackage;` to the imports at the top of the file
-  - Add `new RNUserreportSdkPackage()` to the list returned by the `getPackages()` method
-2. Append the following lines to `android/settings.gradle`:
-  	```
-  	include ':react-native-userreport-sdk'
-  	project(':react-native-userreport-sdk').projectDir = new File(rootProject.projectDir, 	'../node_modules/react-native-userreport-sdk/android')
-  	```
-3. Insert the following lines inside the dependencies block in `android/app/build.gradle`:
-  	```
-      compile project(':react-native-userreport-sdk')
-  	```
-
-#### Windows
-[Read it! :D](https://github.com/ReactWindows/react-native)
-
-1. In Visual Studio add the `RNUserreportSdk.sln` in `node_modules/react-native-userreport-sdk/windows/RNUserreportSdk.sln` folder to their solution, reference from their app.
-2. Open up your `MainPage.cs` app
-  - Add `using Userreport.Sdk.RNUserreportSdk;` to the usings at the top of the file
-  - Add `new RNUserreportSdkPackage()` to the `List<IReactPackage>` returned by the `Packages` method
-
-
-## Usage
-```javascript
-import RNUserreportSdk from 'react-native-userreport-sdk';
-
-// TODO: What to do with the module?
-RNUserreportSdk;
+Update your `AndroidMainfest.xml` and declare that your app is an Ad Manager app, as instructed on [Google's Ad Manager guide](https://developers.google.com/ad-manager/mobile-ads-sdk/android/quick-start#update_your_androidmanifestxml):
+```xml
+<manifest>
+    <application>
+        <meta-data
+            android:name="com.google.android.gms.ads.AD_MANAGER_APP"
+            android:value="true"/>
+    </application>
+</manifest>
 ```
-  
+
+## Setup of [react-native-device-info](https://www.npmjs.com/package/react-native-device-info)
+
+### Automatic
+```bash
+react-native link react-native-device-info
+cd ios
+pod install
+```
+### Manual 
+Follow the link: https://www.npmjs.com/package/react-native-device-info
+
+# Usage for screen/section tracking
+
+Configure the UserReport ReactNative SDK using your `PUBLISHER_ID` and your `MEDIA_ID`.
+
+Your `PUBLISHER_ID` and `MEDIA_ID` can be found on the Media Setting page in UserReport.
+
+
+```javascript
+// Configure
+UserReport.configure("PUBLISHER_ID","MEDIA_ID");
+```
+
+Note: only Android and iOS supported as a platform. So make sure you invoke `configure` only on these platforms. On other platforms, it will return an error.
+
+
+Example: 
+
+```javascript
+//App.js
+import {Platform} from 'react-native';
+import UserReport from '@apr/react-native-userreport-sdk'
+
+export default class App extends Component{
+    componentDidMount() {
+        var mediaId = Platform.OS === 'ios' ?
+         "MEDIA_ID_FOR_IOS": "MEDIA_ID_FOR_ANDROID";
+      
+        UserReport.configure("PUBLISHER_ID",mediaId);
+    }
+}
+```
+
+While development it is recommended to set `debug` flag in the `settings` parameter, so you will be able to understand that it is configured correctly, in case of errors they will be written to the console. 
+Example:
+
+```javascript
+UserReport.configure("PUBLISHER_ID","MEDIA_ID",  { debug: true });
+```
+
+There are two types of tracking:
+  - Screen view tracking (`UserReport.trackScreenView()`)
+  - Section view tracking (`UserReport.trackSectionScreenView()`)
+
+If a media (website) has one single topic, it can be tracked using `UserReport.trackScreenView()`.
+
+If a website has different sections, for instance *Health*, *World news* and *Local news*, then it should be tracked using `UserReport.trackSectionScreenView(sectionId)`.  The `sectionId` for a particular section can be found on the Media Setting page in UserReport.
+Even when `UserReport.trackSectionScreenView(sectionId)` is used `UserReport.trackScreenView()` should be invoked as well.
+
+Example of tracking screen view:
+```javascript
+export default class ScreenView extends Component {
+    componentDidMount() {
+        UserReport.trackScreenView();
+    }
+
+    render() {...}
+}
+```
+
+
+Example of tracking section screen view:
+```javascript
+export default class ScreenView extends Component {
+    componentDidMount() {
+        UserReport.trackScreenView();
+        UserReport.trackSectionScreenView(sectionId);
+    }
+
+    render() {...}
+}
+```
