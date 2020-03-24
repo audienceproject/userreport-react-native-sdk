@@ -30,18 +30,17 @@ const info = (...args) => {
 let advertisingId;
 
 RNUserreportSdk.getAdvertisingId()
-    .then(data => (
-        advertisingId = data.advertisingId
-    ))
+    .then(data => {
+        advertisingId = data.advertisingId;
+        if (!advertisingId) {
+          warn('Unable to get advertizing ID');
+          advertisingId = '00000000-0000-0000-0000-000000000000';
+        }
+    })
     .catch(() => {
         warn('Unable to get advertizing ID');
         advertisingId = '00000000-0000-0000-0000-000000000000';
     });
-
-if (!advertisingId) {
-  warn('Unable to get advertizing ID');
-  advertisingId = '00000000-0000-0000-0000-000000000000';
-}
 
 const bundleId = getBundleId();
 if (!bundleId) {
@@ -66,14 +65,14 @@ const os = Platform.OS;
 
 const track = (trackingCode, consent) => {
   const random = Math.floor(Math.random() * 10 * 1000 * 1000 * 1000);
-  
+
   let url = 'https://visitanalytics.userreport.com/hit.gif' +
     `?t=${trackingCode}` +
     `&r=${random}` +
     `&d=${advertisingId}` +
     `&med=${[bundleId, buildNumber].join('/')}` +
     `&idfv=${uniqueId}`;
-    
+
     if(consent && consent !== ''){
       url +=`&iab_consent=${consent}`;
     }
@@ -125,7 +124,7 @@ const trackSectionScreenView = sectionId => {
   if (!sakData) {
     return error('UserReport SDK is not configured properly');
   }
-  
+
   if(!sakData.sections || !sakData.sections[sectionId]) {
     return error('Section is missing in this media');
   }

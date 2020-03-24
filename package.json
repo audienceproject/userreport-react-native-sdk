@@ -1,14 +1,22 @@
 {
   "name": "react-native-userreport-sdk",
   "version": "1.0.1",
-  "description": "",
+  "description": "Running UserReport in React Native applications https://www.userreport.com",
   "main": "index.js",
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/audienceproject/userreport-react-native-sdk",
   "keywords": [
     "react-native"
   ],
-  "author": "",
-  "license": "",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:audienceproject/userreport-react-native-sdk.git"
+  },
+  "author": "AudienceProject",
   "devDependencies": {
     "react-native": "^0.61.5"
+  },
+  "dependencies":{
+    "react-native-device-info": "^5.5.3"
   }
 }
