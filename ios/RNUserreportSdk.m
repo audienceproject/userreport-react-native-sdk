@@ -17,7 +17,8 @@ RCT_EXPORT_METHOD(getAdvertisingId:(RCTPromiseResolveBlock)resolve
                   rejecter:(RCTPromiseRejectBlock)reject)
 {
     NSUUID *advertisingId = [[ASIdentifierManager sharedManager] advertisingIdentifier];
-    NSDictionary * dict = @{@"advertisingId" : advertisingId};
+    NSString * advertisingIdStr = [advertisingId UUIDString]; 
+    NSDictionary * dict = @{@"advertisingId" : advertisingIdStr};
     resolve(dict);
 }
 
