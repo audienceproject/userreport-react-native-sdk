@@ -26,7 +26,7 @@ Update your `AndroidMainfest.xml` and declare that your app is an Ad Manager app
 ### Automatic
 ```bash
 react-native link react-native-device-info
-react-native link react-native-userreport-sdk
+react-native link @apr/react-native-userreport-sdk
 cd ios
 pod install
 ```
