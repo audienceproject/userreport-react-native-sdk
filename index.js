@@ -70,9 +70,9 @@ const track = (trackingCode, consent) => {
     `?t=${trackingCode}` +
     `&r=${random}` +
     `&d=${advertisingId}` +
-    `&med=${[bundleId, buildNumber].join('/')}` +
+    `&med=${encodeURIComponent([bundleId, buildNumber].filter(Boolean).join('/'))}` +
     `&idfv=${uniqueId}`;
-
+    
     if(consent && consent !== ''){
       url +=`&iab_consent=${consent}`;
     }
