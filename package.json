@@ -1,6 +1,6 @@
 {
-  "name": "react-native-userreport-sdk",
-  "version": "1.0.1",
+  "name": "@apr/react-native-userreport-sdk",
+  "version": "2.0.0",
   "description": "Running UserReport in React Native applications https://www.userreport.com",
   "main": "index.js",
   "license": "Apache-2.0",
