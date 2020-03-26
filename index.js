@@ -1,11 +1,19 @@
-import { NativeModules } from 'react-native';
+import { NativeModules, Dimensions } from 'react-native';
 
 const { RNUserreportSdk } = NativeModules;
 
 
 import { Platform } from 'react-native';
-// import RNAdvertisingId from 'react-native-advertising-id';
-import { getBundleId, getBuildNumber, getUniqueId } from 'react-native-device-info';
+import { 
+  getBundleId,
+  getBuildNumber,
+  getUniqueId,
+  getSystemName,
+  getSystemVersion,
+  getDeviceId,
+  getBrand,
+  getModel
+} from 'react-native-device-info';
 
 let debug = false;
 
@@ -61,6 +69,13 @@ if (!uniqueId) {
 }
 
 const os = Platform.OS;
+const systemName =  getSystemName();
+const systemVersion = getSystemVersion();
+const deviceId = getDeviceId();
+const brand = getBrand();
+const model = getModel();
+const screen = Dimensions.get('screen');
+
 
 
 const track = (trackingCode, consent) => {
@@ -71,7 +86,11 @@ const track = (trackingCode, consent) => {
     `&r=${random}` +
     `&d=${advertisingId}` +
     `&med=${encodeURIComponent([bundleId, buildNumber].filter(Boolean).join('/'))}` +
-    `&idfv=${uniqueId}`;
+    `&idfv=${uniqueId}` +
+    `&os=${encodeURIComponent(systemName)}` +
+    `&osv=${encodeURIComponent(systemVersion)}` +
+    `&dn=${encodeURIComponent([brand, model, deviceId].join(' '))}` + 
+    `&dr=${Math.round(screen.width * screen.scale )}x${Math.round(screen.height * screen.scale)}`;
     
     if(consent && consent !== ''){
       url +=`&iab_consent=${consent}`;
