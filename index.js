@@ -36,6 +36,7 @@ const info = (...args) => {
   }
 
 let advertisingId;
+let sakData;
 
 RNUserreportSdk.getAdvertisingId()
     .then(data => {
@@ -50,19 +51,19 @@ RNUserreportSdk.getAdvertisingId()
         advertisingId = '00000000-0000-0000-0000-000000000000';
     });
 
-const bundleId = getBundleId();
+let bundleId = getBundleId();
 if (!bundleId) {
   warn('Unable to get device bundle ID');
   bundleId = '';
 }
 
-const buildNumber = getBuildNumber();
+let buildNumber = getBuildNumber();
 if (!buildNumber) {
   warn('Unable to get device build number');
   buildNumber = '';
 }
 
-const uniqueId = getUniqueId();
+let uniqueId = getUniqueId();
 if (!uniqueId) {
   warn('Unable to get device unique ID');
   uniqueId = '';
