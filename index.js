@@ -69,6 +69,8 @@ if (!uniqueId) {
   uniqueId = '';
 }
 
+let anonymousTracking = false;
+
 const os = Platform.OS;
 const systemName =  getSystemName();
 const systemVersion = getSystemVersion();
@@ -82,7 +84,8 @@ const screen = Dimensions.get('screen');
 const track = (trackingCode, consent) => {
   const random = Math.floor(Math.random() * 10 * 1000 * 1000 * 1000);
 
-  let url = 'https://visitanalytics.userreport.com/hit.gif' +
+  const domain = anonymousTracking ? 'visitanalytics.dnt-userreport.com' : 'visitanalytics.userreport.com';
+  let url = `https://${domain}/hit.gif` +
     `?t=${trackingCode}` +
     `&r=${random}` +
     `&d=${advertisingId}` +
@@ -118,7 +121,9 @@ const configure = (sakId, mediaId, settings) => {
     return error('Invalid configure params specified');
   }
 
-  fetch(`https://sak.userreport.com/${sakId}/media/${mediaId}/${os}.json`)
+  const domain = anonymousTracking ? 'sak.dnt-userreport.com' : 'sak.userreport.com';
+  const url = `https://${domain}/${sakId}/media/${mediaId}/${os}.json`;
+  fetch(url)
     .then(response => (
       response.json()
         .then(json => (
@@ -128,6 +133,10 @@ const configure = (sakId, mediaId, settings) => {
     ))
     .catch(() => error('Unable to load SAK configuration'));
 }
+
+const setAnonymousTracking = isEnabled => {
+  anonymousTracking = isEnabled;
+};
 
 const trackScreenView = () => {
   if (!sakData) {
@@ -154,6 +163,7 @@ const trackSectionScreenView = sectionId => {
 
 export default {
   configure,
+  setAnonymousTracking,
   trackScreenView,
   trackSectionScreenView,
 };
