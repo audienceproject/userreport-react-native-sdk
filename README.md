@@ -104,3 +104,13 @@ export default class ScreenView extends Component {
     render() {...}
 }
 ```
+
+## Anonymous tracking
+
+You can configure SDK to use anonymous tracking using `setAnonymousTracking` command:
+
+```javascript
+import UserReport from '@apr/react-native-userreport-sdk';
+
+UserReport.setAnonymousTracking(true);
+```
