@@ -88,9 +88,9 @@ const track = (trackingCode, consent) => {
   let url = `https://${domain}/hit.gif` +
     `?t=${trackingCode}` +
     `&r=${random}` +
-    `&d=${advertisingId}` +
+    `&d=${anonymousTracking ? "" : advertisingId}` +
     `&med=${encodeURIComponent([bundleId, buildNumber].filter(Boolean).join('/'))}` +
-    `&idfv=${uniqueId}` +
+    `&idfv=${anonymousTracking ? "" : uniqueId}` +
     `&os=${encodeURIComponent(systemName)}` +
     `&osv=${encodeURIComponent(systemVersion)}` +
     `&dn=${encodeURIComponent([brand, model, deviceId].join(' '))}` + 
