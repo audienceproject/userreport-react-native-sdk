@@ -14,5 +14,10 @@
     "react-native": "^0.63.4",
     "react-native-device-info": "^7.2.1"
   },
+  "devDependencies": {
+    "eslint": "^7.14.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1"
+  },
   "type": "module"
 }
