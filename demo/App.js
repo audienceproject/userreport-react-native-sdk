@@ -1,113 +1,120 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   SafeAreaView,
-  StyleSheet,
-  ScrollView,
   View,
   Text,
-  StatusBar,
+  Switch,
+  StyleSheet,
 } from 'react-native';
+import UserReport from '@apr/react-native-userreport-sdk';
 
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+UserReport.setDebug(true);
+UserReport.configure('audienceproject', '647303c6-e40c-4c8d-ad54-04e2502258f0');
 
-const App: () => React$Node = () => {
-  return (
+const App = () => {
+  const [section, setSection] = useState('');
+  useEffect(() => {
+    UserReport.trackScreenView();
+
+    if (section === 'section1') {
+      UserReport.trackSectionScreenView('1205d37e-319d-44ea-959b-15cd46e46ffa');
+    } else if (section === 'section2') {
+      UserReport.trackSectionScreenView('c43a981c-7f48-417c-8e52-4966bd3228e7');
+    }
+  }, [section]);
+
+  const [dnt, setDnt] = useState(false);
+  useEffect(() => {
+    UserReport.setAnonymousTracking(dnt);
+  }, [dnt]);
+
+  const [idfa, setIdfa] = useState(true);
+  useEffect(() => {
+    UserReport.setIdfa(idfa);
+  }, [idfa]);
+
+  const renderRoot = () => (
     <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
-          <Header />
-          {global.HermesInternal == null ? null : (
-            <View style={styles.engine}>
-              <Text style={styles.footer}>Engine: Hermes</Text>
-            </View>
-          )}
-          <View style={styles.body}>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Step One</Text>
-              <Text style={styles.sectionDescription}>
-                Edit <Text style={styles.highlight}>App.js</Text> to change this
-                screen and then come back to see your edits.
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>See Your Changes</Text>
-              <Text style={styles.sectionDescription}>
-                <ReloadInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Debug</Text>
-              <Text style={styles.sectionDescription}>
-                <DebugInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Learn More</Text>
-              <Text style={styles.sectionDescription}>
-                Read the docs to discover what to do next:
-              </Text>
-            </View>
-            <LearnMoreLinks />
-          </View>
-        </ScrollView>
-      </SafeAreaView>
+      <Text style={styles.subheaderText}>Application</Text>
+
+      <Text style={styles.link} onPress={() => setSection('section1')}>
+        Section 1
+      </Text>
+      <Text style={styles.link} onPress={() => setSection('section2')}>
+        Section 2
+      </Text>
     </>
+  );
+
+  const renderSection = (number) => (
+    <>
+      <Text style={styles.subheaderText}>Application → Section {number}</Text>
+
+      <Text style={styles.link} onPress={() => setSection('')}>
+        Back
+      </Text>
+    </>
+  );
+
+  return (
+    <SafeAreaView style={styles.rootView}>
+      <Text style={styles.headerText}>UserReport ReactNative SDK</Text>
+
+      <View style={styles.pageView}>
+        {section === '' && renderRoot()}
+        {section === 'section1' && renderSection(1)}
+        {section === 'section2' && renderSection(2)}
+      </View>
+
+      <View style={styles.switchView}>
+        <Text style={styles.switchText}>Anonymous Tracking</Text>
+        <Switch
+          value={dnt}
+          onValueChange={() => setDnt((previousValue) => !previousValue)}
+        />
+      </View>
+
+      <View style={styles.switchView}>
+        <Text style={styles.switchText}>IDFA</Text>
+        <Switch
+          value={idfa}
+          onValueChange={() => setIdfa((previousValue) => !previousValue)}
+        />
+      </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: Colors.lighter,
+  rootView: {
+    margin: 20,
+    flex: 1,
   },
-  engine: {
-    position: 'absolute',
-    right: 0,
+  pageView: {
+    flex: 1,
   },
-  body: {
-    backgroundColor: Colors.white,
+  headerText: {
+    fontSize: 22,
+    fontWeight: 'bold',
   },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+  subheaderText: {
+    color: 'gray',
+    fontSize: 20,
+    marginTop: 10,
   },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: Colors.black,
+  link: {
+    marginTop: 10,
+    color: 'blue',
   },
-  sectionDescription: {
-    marginTop: 8,
+  switchView: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: 10,
+  },
+  switchText: {
     fontSize: 18,
-    fontWeight: '400',
-    color: Colors.dark,
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  footer: {
-    color: Colors.dark,
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
+    marginRight: 10,
   },
 });
 
