@@ -6,7 +6,7 @@ import {
   Switch,
   StyleSheet,
 } from 'react-native';
-import UserReport from '@apr/react-native-userreport-sdk';
+import UserReport from '@audienceproject/react-native-userreport-sdk';
 
 UserReport.setDebug(true);
 UserReport.configure('audienceproject', '647303c6-e40c-4c8d-ad54-04e2502258f0');
