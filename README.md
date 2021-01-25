@@ -9,10 +9,10 @@ Running UserReport in React Native applications.
 
 ## Installation
 
-Install [NPM package](https://www.npmjs.com/package/@audienceproject/react-native-userreport-sdk):
+Install [NPM package](https://www.npmjs.com/package/@audienceproject/react-native-userreport-sdk) and dependencies:
 
 ```sh
-npm install --save @audienceproject/data-web
+npm install --save @audienceproject/react-native-userreport-sdk react-native-device-info
 ```
 
 ### On Android
