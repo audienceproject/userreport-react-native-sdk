@@ -6,7 +6,6 @@
 
 import AdSupport
 import AppTrackingTransparency
-//import Foundation
 
 @objc(RNAdvertisingId)
 class RNAdvertisingId: NSObject {
@@ -18,19 +17,18 @@ class RNAdvertisingId: NSObject {
                 "isLimitAdTrackingEnabled" : !isAdvertisingTrackingEnabled,
                 "advertisingId" : ""
             ]
-            
+
             if (isAdvertisingTrackingEnabled) {
                 let idfa : String = ASIdentifierManager.shared().advertisingIdentifier.uuidString
                 response["advertisingId"] = idfa
             }
-            
+
             resolve(response)
         }
-        
-        
+
+
     }
 
-    //NEWLY ADDED PERMISSIONS FOR iOS 14
     func isAppTrackingEnabled(requestPermission: Bool = false, result: @escaping (_ isAuthorized: Bool) -> Void){
         if #available(iOS 14, *) {
             if(!requestPermission) {
@@ -50,5 +48,22 @@ class RNAdvertisingId: NSObject {
         else {
             result(ASIdentifierManager.shared().isAdvertisingTrackingEnabled);
         }
+    }
+
+    @objc
+    func getAdvertisingIdLegacy(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) {
+        let isAdvertisingTrackingEnabled : Bool = ASIdentifierManager.shared().isAdvertisingTrackingEnabled
+
+        let response: NSMutableDictionary = [
+            "isLimitAdTrackingEnabled" : !isAdvertisingTrackingEnabled,
+            "advertisingId" : ""
+        ]
+
+        if (isAdvertisingTrackingEnabled) {
+            let idfa : String = ASIdentifierManager.shared().advertisingIdentifier.uuidString
+            response["advertisingId"] = idfa
+        }
+
+        resolve(response)
     }
 }

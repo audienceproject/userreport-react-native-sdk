@@ -105,3 +105,11 @@ In debug mode SDK will log debugging information into console:
 ```js
 UserReport.setDebug(true);
 ```
+
+#### IDFA and iOS 14
+
+Starting iOS 14.5 you’ll need to [receive user’s permission](https://developer.apple.com/app-store/user-privacy-and-data-use/) to access device advertising identifier. That behavior can be disabled for older iOS versions:
+
+```js
+UserReport.setIdfaDialog(false);
+```

@@ -28,11 +28,6 @@ const App = () => {
     UserReport.setAnonymousTracking(dnt);
   }, [dnt]);
 
-  const [idfa, setIdfa] = useState(true);
-  useEffect(() => {
-    UserReport.setIdfa(idfa);
-  }, [idfa]);
-
   const renderRoot = () => (
     <>
       <Text style={styles.subheaderText}>Application</Text>
@@ -71,14 +66,6 @@ const App = () => {
         <Switch
           value={dnt}
           onValueChange={() => setDnt((previousValue) => !previousValue)}
-        />
-      </View>
-
-      <View style={styles.switchView}>
-        <Text style={styles.switchText}>IDFA</Text>
-        <Switch
-          value={idfa}
-          onValueChange={() => setIdfa((previousValue) => !previousValue)}
         />
       </View>
     </SafeAreaView>

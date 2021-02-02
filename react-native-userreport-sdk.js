@@ -26,22 +26,22 @@ export const setAnonymousTracking = (value) => {
   debugInfo(`Anonymous tracking ${value ? 'enabled' : 'disabled'}`);
 };
 
-/* idfa */
+/* idfa dialog */
 
-let useIdfa = true;
+let useIdfaDialog = true;
 
-export const setIdfa = (value) => {
-  useIdfa = value;
-  debugInfo(`IDFA ${value ? 'enabled' : 'disabled'}`);
+export const setIdfaDialog = (value) => {
+  useIdfaDialog = value;
+  debugInfo(`IDFA dialog ${value ? 'enabled' : 'disabled'}`);
 };
 
 const loadIdfa = async () => {
-  if (!useIdfa) {
-    return '';
-  }
+  const nativeModule = ReactNative.NativeModules.RNAdvertisingId;
+  const nativeMethod = ReactNative.Platform.OS !=='ios' || useIdfaDialog
+    ? nativeModule.getAdvertisingId : nativeModule.getAdvertisingIdLegacy;
 
   try {
-    const data = await ReactNative.NativeModules.RNAdvertisingId.getAdvertisingId(); // FIXME: https://github.com/applike/react-native-advertising-id/pull/26
+    const data = await nativeMethod();
     return data.advertisingId || '';
   } catch (error) {
     return '';
@@ -101,7 +101,7 @@ const fireTrackingPixel = async (trackingCode, consentString) => {
   const deviceResolution = `${screenWidth}x${screenHeight}`;
 
   const path = `https://${domain}/hit.gif`;
-  const params = `?t=${encodeURIComponent(trackingCode)}` // eslint-disable-line prefer-template
+  const params = `?t=${encodeURIComponent(trackingCode)}`
     + `&r=${random}`
     + (!useAnonymousTracking && idfa ? `&d=${encodeURIComponent(idfa)}` : '')
     + (!useAnonymousTracking && idfv ? `&idfv=${encodeURIComponent(idfv)}` : '')
@@ -139,7 +139,7 @@ export const trackSectionScreenView = async (sectionId) => {
 export default {
   setDebug,
   setAnonymousTracking,
-  setIdfa,
+  setIdfaDialog,
   configure,
   trackScreenView,
   trackSectionScreenView,

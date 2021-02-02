@@ -10,6 +10,8 @@
 
 RCT_EXTERN_METHOD(getAdvertisingId:(RCTPromiseResolveBlock)resolve rejecter: (RCTPromiseRejectBlock)reject)
 
+RCT_EXTERN_METHOD(getAdvertisingIdLegacy:(RCTPromiseResolveBlock)resolve rejecter: (RCTPromiseRejectBlock)reject)
+
 + (BOOL)requiresMainQueueSetup
 {
   return NO;
