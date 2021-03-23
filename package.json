@@ -1,6 +1,6 @@
 {
   "name": "@audienceproject/react-native-userreport-sdk",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "description": "Running UserReport in React Native applications",
   "main": "react-native-userreport-sdk.js",
   "repository": {
@@ -11,8 +11,8 @@
   "license": "Apache-2.0",
   "homepage": "https://github.com/audienceproject/userreport-react-native-sdk",
   "dependencies": {
-    "react-native": "^0.63.4",
-    "react-native-device-info": "^7.2.1"
+    "react-native": "^0.64.0",
+    "react-native-device-info": "^8.0.6"
   },
   "devDependencies": {
     "eslint": "^7.14.0",
