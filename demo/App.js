@@ -1,11 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {
-  SafeAreaView,
-  View,
-  Text,
-  Switch,
-  StyleSheet,
-} from 'react-native';
+import {SafeAreaView, View, Text, Switch, StyleSheet} from 'react-native';
 import UserReport from '@audienceproject/react-native-userreport-sdk';
 
 UserReport.setDebug(true);
@@ -41,7 +35,7 @@ const App = () => {
     </>
   );
 
-  const renderSection = (number) => (
+  const renderSection = number => (
     <>
       <Text style={styles.subheaderText}>Application → Section {number}</Text>
 
@@ -65,7 +59,7 @@ const App = () => {
         <Text style={styles.switchText}>Anonymous Tracking</Text>
         <Switch
           value={dnt}
-          onValueChange={() => setDnt((previousValue) => !previousValue)}
+          onValueChange={() => setDnt(previousValue => !previousValue)}
         />
       </View>
     </SafeAreaView>

@@ -1,5 +1,5 @@
-import ReactNative from 'react-native';
-import ReactNativeDeviceInfo from 'react-native-device-info';
+import ReactNative from 'react-native'; // eslint-disable-line import/no-unresolved
+import ReactNativeDeviceInfo from 'react-native-device-info'; // eslint-disable-line import/no-unresolved
 
 /* debug */
 
@@ -37,7 +37,7 @@ export const setIdfaDialog = (value) => {
 
 const loadIdfa = async () => {
   const nativeModule = ReactNative.NativeModules.RNAdvertisingId;
-  const nativeMethod = ReactNative.Platform.OS !=='ios' || useIdfaDialog
+  const nativeMethod = ReactNative.Platform.OS !== 'ios' || useIdfaDialog
     ? nativeModule.getAdvertisingId : nativeModule.getAdvertisingIdLegacy;
 
   try {
@@ -101,7 +101,7 @@ const fireTrackingPixel = async (trackingCode, consentString) => {
   const deviceResolution = `${screenWidth}x${screenHeight}`;
 
   const path = `https://${domain}/hit.gif`;
-  const params = `?t=${encodeURIComponent(trackingCode)}`
+  const params = `?t=${encodeURIComponent(trackingCode)}` // eslint-disable-line prefer-template
     + `&r=${random}`
     + (!useAnonymousTracking && idfa ? `&d=${encodeURIComponent(idfa)}` : '')
     + (!useAnonymousTracking && idfv ? `&idfv=${encodeURIComponent(idfv)}` : '')
