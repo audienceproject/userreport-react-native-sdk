@@ -1,2 +1,5 @@
 /demo/
 /.eslintrc.cjs
+/babel.config.cjs
+/jest.config.js
+/test.js

@@ -13,8 +13,13 @@ const debugError = (value) => {
 };
 
 export const setDebug = (value) => {
-  useDebug = value;
+  if (value) { // log if debug enabled
+    useDebug = value;
+  }
   debugInfo(`Debug ${value ? 'enabled' : 'disabled'}`);
+  if (!value) { // log if debug disabled
+    useDebug = value;
+  }
 };
 
 /* dnt */

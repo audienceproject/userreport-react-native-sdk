@@ -10,14 +10,21 @@
   "author": "AudienceProject",
   "license": "Apache-2.0",
   "homepage": "https://github.com/audienceproject/userreport-react-native-sdk",
+  "scripts": {
+    "test": "jest"
+  },
   "peerDependencies": {
     "react-native": "^0.64.0",
     "react-native-device-info": "^8.0.6"
   },
   "devDependencies": {
+    "@babel/core": "^7.15.0",
+    "@babel/preset-env": "^7.15.0",
+    "babel-jest": "^27.1.0",
     "eslint": "^7.14.0",
     "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-plugin-import": "^2.22.1"
+    "eslint-plugin-import": "^2.22.1",
+    "jest": "^27.1.0"
   },
   "type": "module"
 }
