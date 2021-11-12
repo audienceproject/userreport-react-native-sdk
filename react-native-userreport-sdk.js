@@ -115,7 +115,7 @@ const fireTrackingPixel = async (trackingCode, consentString) => {
     + `&osv=${encodeURIComponent(systemVersion)}`
     + `&dn=${encodeURIComponent(deviceName)}`
     + `&dr=${encodeURIComponent(deviceResolution)}`
-    + (consentString ? `&iab_consent=${encodeURIComponent(consentString)}` : '');
+    + (consentString ? `&gdpr_consent=${encodeURIComponent(consentString)}` : '');
 
   const url = path + params;
   debugInfo(`Firing tracking pixel ${url}`);

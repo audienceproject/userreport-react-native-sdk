@@ -103,7 +103,7 @@ test('regular mode', async () => {
       + '&osv=__DeviceInfoSystemVersion__'
       + '&dn=__DeviceInfoBrand__%20__DeviceInfoDeviceId__'
       + '&dr=150x300'
-      + '&iab_consent=__FetchConsent__');
+      + '&gdpr_consent=__FetchConsent__');
 
   expect(fetch).toHaveBeenNthCalledWith(3,
     'https://visitanalytics.userreport.com/hit.gif'
@@ -116,7 +116,7 @@ test('regular mode', async () => {
       + '&osv=__DeviceInfoSystemVersion__'
       + '&dn=__DeviceInfoBrand__%20__DeviceInfoDeviceId__'
       + '&dr=150x300'
-      + '&iab_consent=__FetchConsent__');
+      + '&gdpr_consent=__FetchConsent__');
 });
 
 test('legacy idfa', async () => {
@@ -138,7 +138,7 @@ test('legacy idfa', async () => {
       + '&osv=__DeviceInfoSystemVersion__'
       + '&dn=__DeviceInfoBrand__%20__DeviceInfoDeviceId__'
       + '&dr=150x300'
-      + '&iab_consent=__FetchConsent__');
+      + '&gdpr_consent=__FetchConsent__');
 });
 
 test('dnt mode', async () => {
@@ -166,7 +166,7 @@ test('dnt mode', async () => {
       + '&osv=__DeviceInfoSystemVersion__'
       + '&dn=__DeviceInfoBrand__%20__DeviceInfoDeviceId__'
       + '&dr=150x300'
-      + '&iab_consent=__FetchConsent__');
+      + '&gdpr_consent=__FetchConsent__');
 
   expect(fetch).toHaveBeenNthCalledWith(3,
     'https://visitanalytics.dnt-userreport.com/hit.gif'
@@ -177,5 +177,5 @@ test('dnt mode', async () => {
       + '&osv=__DeviceInfoSystemVersion__'
       + '&dn=__DeviceInfoBrand__%20__DeviceInfoDeviceId__'
       + '&dr=150x300'
-      + '&iab_consent=__FetchConsent__');
+      + '&gdpr_consent=__FetchConsent__');
 });
