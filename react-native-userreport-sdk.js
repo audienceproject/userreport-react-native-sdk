@@ -107,10 +107,10 @@ const fireTrackingPixel = async (trackingCode, consentString) => {
 
   const path = `https://${domain}/hit.gif`;
   const params = `?t=${encodeURIComponent(trackingCode)}` // eslint-disable-line prefer-template
-    + `&r=${random}`
+    + `&rnd=${random}`
     + (!useAnonymousTracking && idfa ? `&d=${encodeURIComponent(idfa)}` : '')
     + (!useAnonymousTracking && idfv ? `&idfv=${encodeURIComponent(idfv)}` : '')
-    + `&med=${encodeURIComponent(bundleId)}`
+    + `&appid=${encodeURIComponent(bundleId)}`
     + `&os=${encodeURIComponent(systemName)}`
     + `&osv=${encodeURIComponent(systemVersion)}`
     + `&dn=${encodeURIComponent(deviceName)}`
