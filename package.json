@@ -11,7 +11,8 @@
   "license": "Apache-2.0",
   "homepage": "https://github.com/audienceproject/userreport-react-native-sdk",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "prepublishOnly": "npm install && npm run test"
   },
   "peerDependencies": {
     "react-native": "^0.64.0",
