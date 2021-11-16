@@ -1,6 +1,6 @@
 {
   "name": "@audienceproject/react-native-userreport-sdk",
-  "version": "3.0.4",
+  "version": "3.0.5",
   "description": "Running UserReport in React Native applications",
   "main": "react-native-userreport-sdk.js",
   "repository": {
@@ -11,7 +11,8 @@
   "license": "Apache-2.0",
   "homepage": "https://github.com/audienceproject/userreport-react-native-sdk",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "prepublishOnly": "npm install && npm run test"
   },
   "peerDependencies": {
     "react-native": "^0.64.0",
@@ -21,8 +22,8 @@
     "@babel/core": "^7.15.0",
     "@babel/preset-env": "^7.15.0",
     "babel-jest": "^27.1.0",
-    "eslint": "^7.14.0",
-    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint": "^8.2.0",
+    "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.22.1",
     "jest": "^27.1.0"
   },

@@ -95,6 +95,7 @@ const fireTrackingPixel = async (trackingCode, consentString) => {
   const idfa = await loadIdfa();
   const idfv = ReactNativeDeviceInfo.getUniqueId();
   const bundleId = ReactNativeDeviceInfo.getBundleId();
+  const appVersion = ReactNativeDeviceInfo.getVersion();
 
   const systemName = ReactNativeDeviceInfo.getSystemName();
   const systemVersion = ReactNativeDeviceInfo.getSystemVersion();
@@ -111,6 +112,7 @@ const fireTrackingPixel = async (trackingCode, consentString) => {
     + (!useAnonymousTracking && idfa ? `&d=${encodeURIComponent(idfa)}` : '')
     + (!useAnonymousTracking && idfv ? `&idfv=${encodeURIComponent(idfv)}` : '')
     + `&appid=${encodeURIComponent(bundleId)}`
+    + `&appver=${encodeURIComponent(appVersion)}`
     + `&os=${encodeURIComponent(systemName)}`
     + `&osv=${encodeURIComponent(systemVersion)}`
     + `&dn=${encodeURIComponent(deviceName)}`

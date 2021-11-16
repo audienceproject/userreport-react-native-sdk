@@ -50,6 +50,7 @@ jest.mock('react-native-device-info', () => ({
 
     getBrand: () => '__DeviceInfoBrand__',
     getDeviceId: () => '__DeviceInfoDeviceId__',
+    getVersion: () => '__VersionNumber__',
   },
 }), { virtual: true });
 
@@ -89,34 +90,42 @@ test('regular mode', async () => {
 
   expect(fetch).toHaveBeenCalledTimes(3);
 
-  expect(fetch).toHaveBeenNthCalledWith(1,
-    'https://sak.userreport.com/publisherId/media/mediaId/ios.json');
+  expect(fetch).toHaveBeenNthCalledWith(
+    1,
+    'https://sak.userreport.com/publisherId/media/mediaId/ios.json',
+  );
 
-  expect(fetch).toHaveBeenNthCalledWith(2,
+  expect(fetch).toHaveBeenNthCalledWith(
+    2,
     'https://visitanalytics.userreport.com/hit.gif'
       + '?t=__FetchMediaCode__'
-      + '&r=4fzzzxjylrx'
+      + '&rnd=4fzzzxjylrx'
       + '&d=__NativeAdvertisingId__'
       + '&idfv=__DeviceInfoUniqueId__'
-      + '&med=__DeviceInfoBundleId__'
+      + '&appid=__DeviceInfoBundleId__'
+      + '&appver=__VersionNumber__'
       + '&os=__DeviceInfoSystemName__'
       + '&osv=__DeviceInfoSystemVersion__'
       + '&dn=__DeviceInfoBrand__%20__DeviceInfoDeviceId__'
       + '&dr=150x300'
-      + '&gdpr_consent=__FetchConsent__');
+      + '&gdpr_consent=__FetchConsent__',
+  );
 
-  expect(fetch).toHaveBeenNthCalledWith(3,
+  expect(fetch).toHaveBeenNthCalledWith(
+    3,
     'https://visitanalytics.userreport.com/hit.gif'
       + '?t=__FetchSectionCode__'
-      + '&r=4fzzzxjylrx'
+      + '&rnd=4fzzzxjylrx'
       + '&d=__NativeAdvertisingId__'
       + '&idfv=__DeviceInfoUniqueId__'
-      + '&med=__DeviceInfoBundleId__'
+      + '&appid=__DeviceInfoBundleId__'
+      + '&appver=__VersionNumber__'
       + '&os=__DeviceInfoSystemName__'
       + '&osv=__DeviceInfoSystemVersion__'
       + '&dn=__DeviceInfoBrand__%20__DeviceInfoDeviceId__'
       + '&dr=150x300'
-      + '&gdpr_consent=__FetchConsent__');
+      + '&gdpr_consent=__FetchConsent__',
+  );
 });
 
 test('legacy idfa', async () => {
@@ -127,18 +136,21 @@ test('legacy idfa', async () => {
     UserReport.trackScreenView(),
   ]);
 
-  expect(fetch).toHaveBeenNthCalledWith(2,
+  expect(fetch).toHaveBeenNthCalledWith(
+    2,
     'https://visitanalytics.userreport.com/hit.gif'
       + '?t=__FetchMediaCode__'
-      + '&r=4fzzzxjylrx'
+      + '&rnd=4fzzzxjylrx'
       + '&d=__NativeAdvertisingLegacyId__'
       + '&idfv=__DeviceInfoUniqueId__'
-      + '&med=__DeviceInfoBundleId__'
+      + '&appid=__DeviceInfoBundleId__'
+      + '&appver=__VersionNumber__'
       + '&os=__DeviceInfoSystemName__'
       + '&osv=__DeviceInfoSystemVersion__'
       + '&dn=__DeviceInfoBrand__%20__DeviceInfoDeviceId__'
       + '&dr=150x300'
-      + '&gdpr_consent=__FetchConsent__');
+      + '&gdpr_consent=__FetchConsent__',
+  );
 });
 
 test('dnt mode', async () => {
@@ -154,28 +166,36 @@ test('dnt mode', async () => {
 
   expect(fetch).toHaveBeenCalledTimes(3);
 
-  expect(fetch).toHaveBeenNthCalledWith(1,
-    'https://sak.dnt-userreport.com/publisherId/media/mediaId/android.json');
+  expect(fetch).toHaveBeenNthCalledWith(
+    1,
+    'https://sak.dnt-userreport.com/publisherId/media/mediaId/android.json',
+  );
 
-  expect(fetch).toHaveBeenNthCalledWith(2,
+  expect(fetch).toHaveBeenNthCalledWith(
+    2,
     'https://visitanalytics.dnt-userreport.com/hit.gif'
       + '?t=__FetchMediaCode__'
-      + '&r=4fzzzxjylrx'
-      + '&med=__DeviceInfoBundleId__'
+      + '&rnd=4fzzzxjylrx'
+      + '&appid=__DeviceInfoBundleId__'
+      + '&appver=__VersionNumber__'
       + '&os=__DeviceInfoSystemName__'
       + '&osv=__DeviceInfoSystemVersion__'
       + '&dn=__DeviceInfoBrand__%20__DeviceInfoDeviceId__'
       + '&dr=150x300'
-      + '&gdpr_consent=__FetchConsent__');
+      + '&gdpr_consent=__FetchConsent__',
+  );
 
-  expect(fetch).toHaveBeenNthCalledWith(3,
+  expect(fetch).toHaveBeenNthCalledWith(
+    3,
     'https://visitanalytics.dnt-userreport.com/hit.gif'
       + '?t=__FetchSectionCode__'
-      + '&r=4fzzzxjylrx'
-      + '&med=__DeviceInfoBundleId__'
+      + '&rnd=4fzzzxjylrx'
+      + '&appid=__DeviceInfoBundleId__'
+      + '&appver=__VersionNumber__'
       + '&os=__DeviceInfoSystemName__'
       + '&osv=__DeviceInfoSystemVersion__'
       + '&dn=__DeviceInfoBrand__%20__DeviceInfoDeviceId__'
       + '&dr=150x300'
-      + '&gdpr_consent=__FetchConsent__');
+      + '&gdpr_consent=__FetchConsent__',
+  );
 });
