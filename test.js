@@ -50,6 +50,7 @@ jest.mock('react-native-device-info', () => ({
 
     getBrand: () => '__DeviceInfoBrand__',
     getDeviceId: () => '__DeviceInfoDeviceId__',
+    getVersion: () => '__VersionNumber__',
   },
 }), { virtual: true });
 
@@ -102,6 +103,7 @@ test('regular mode', async () => {
       + '&d=__NativeAdvertisingId__'
       + '&idfv=__DeviceInfoUniqueId__'
       + '&appid=__DeviceInfoBundleId__'
+      + '&appver=__VersionNumber__'
       + '&os=__DeviceInfoSystemName__'
       + '&osv=__DeviceInfoSystemVersion__'
       + '&dn=__DeviceInfoBrand__%20__DeviceInfoDeviceId__'
@@ -117,6 +119,7 @@ test('regular mode', async () => {
       + '&d=__NativeAdvertisingId__'
       + '&idfv=__DeviceInfoUniqueId__'
       + '&appid=__DeviceInfoBundleId__'
+      + '&appver=__VersionNumber__'
       + '&os=__DeviceInfoSystemName__'
       + '&osv=__DeviceInfoSystemVersion__'
       + '&dn=__DeviceInfoBrand__%20__DeviceInfoDeviceId__'
@@ -141,6 +144,7 @@ test('legacy idfa', async () => {
       + '&d=__NativeAdvertisingLegacyId__'
       + '&idfv=__DeviceInfoUniqueId__'
       + '&appid=__DeviceInfoBundleId__'
+      + '&appver=__VersionNumber__'
       + '&os=__DeviceInfoSystemName__'
       + '&osv=__DeviceInfoSystemVersion__'
       + '&dn=__DeviceInfoBrand__%20__DeviceInfoDeviceId__'
@@ -173,6 +177,7 @@ test('dnt mode', async () => {
       + '?t=__FetchMediaCode__'
       + '&rnd=4fzzzxjylrx'
       + '&appid=__DeviceInfoBundleId__'
+      + '&appver=__VersionNumber__'
       + '&os=__DeviceInfoSystemName__'
       + '&osv=__DeviceInfoSystemVersion__'
       + '&dn=__DeviceInfoBrand__%20__DeviceInfoDeviceId__'
@@ -186,6 +191,7 @@ test('dnt mode', async () => {
       + '?t=__FetchSectionCode__'
       + '&rnd=4fzzzxjylrx'
       + '&appid=__DeviceInfoBundleId__'
+      + '&appver=__VersionNumber__'
       + '&os=__DeviceInfoSystemName__'
       + '&osv=__DeviceInfoSystemVersion__'
       + '&dn=__DeviceInfoBrand__%20__DeviceInfoDeviceId__'
