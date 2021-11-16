@@ -1,6 +1,6 @@
 {
   "name": "@audienceproject/react-native-userreport-sdk",
-  "version": "3.0.4",
+  "version": "3.0.5",
   "description": "Running UserReport in React Native applications",
   "main": "react-native-userreport-sdk.js",
   "repository": {
