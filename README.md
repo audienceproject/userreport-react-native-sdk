@@ -1,6 +1,6 @@
 # UserReport React Native SDK
 
-Running UserReport in React Native applications.
+Running UserReport tracking in React Native applications.
 
 ## Supported Platforms
 
