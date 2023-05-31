@@ -15,8 +15,8 @@
     "prepublishOnly": "npm install && npm run test"
   },
   "peerDependencies": {
-    "react-native": "^0.64.0",
-    "react-native-device-info": "^8.0.6"
+    "react-native": "^0.71.8",
+    "react-native-device-info": "^10.6.0"
   },
   "devDependencies": {
     "@babel/core": "^7.15.0",
